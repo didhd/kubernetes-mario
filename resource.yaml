@@ -18,8 +18,6 @@ spec:
       containers:
       - name: mario
         image: pengbai/docker-supermario
-      nodeSelector:
-        nodegroup-type: "managed-frontend-workloads"
 ---
 apiVersion: v1
 kind: Service
