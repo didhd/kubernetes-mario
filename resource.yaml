@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mario
+  labels:
+    app: mario
+  namespace: mario
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mario
+  template:
+    metadata:
+      labels:
+        app: mario
+    spec:
+      containers:
+      - name: mario
+        image: pengbai/docker-supermario
+      nodeSelector:
+        nodegroup-type: "managed-frontend-workloads"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mario
+  namespace: mario
+spec:
+  selector:
+    app: mario
+  ports:
+  type: LoadBalancer
+  ports:
+   -  protocol: TCP
+      port: 80
+      targetPort: 8080
